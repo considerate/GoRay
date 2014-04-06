@@ -40,14 +40,17 @@ func main() {
 		0, 0, far / focalLength, 0,
 		0, 0, 0, 1},
 		4, 4)
-	fmt.Println("Generating photons")
+
 	//Create scene (scene.go)
+	fmt.Println("Creating scene")
 	scene := setupScene()
 	if photonMap {
+		fmt.Println("Generating photons")
 		scene.photons = shootPhotons(scene)
 	}
-	fmt.Println("Rendering image")
+
 	//Render image
+	fmt.Println("Rendering image")
 	render(camera, scene)
 	fmt.Println("Done")
 }
@@ -121,7 +124,6 @@ func raytrace(render bool, ray *Ray, scene Scene, depth ...uint8) (bool, Vector3
 				nil,
 			}
 			for _, photon := range photons {
-				//fmt.Println(photon.position)
 				if photonSphere.contains(photon.position) {
 
 					weight := math.Max(0.0, -normal.dot(photon.incomingDirection))
@@ -132,7 +134,6 @@ func raytrace(render bool, ray *Ray, scene Scene, depth ...uint8) (bool, Vector3
 				}
 			}
 			color = color.multScalar(1.0 / photonArea * 3.0)
-			//color = color.add(shadePoint(point, normal, object, lights).multScalar(0.3))
 		} else {
 			color = shadePoint(point, normal, object, lights)
 		}
@@ -252,6 +253,7 @@ func render(camera *matrix.DenseMatrix, scene Scene) {
 				color2 := renderpoint(camera, scene, x+0.5, y)
 				color3 := renderpoint(camera, scene, x, y+0.5)
 				color4 := renderpoint(camera, scene, x+0.5, y+0.5)
+
 				//Average 4 points for this pixel
 				averageColor := color1.add(color2).add(color3).add(color4).multScalar(0.25)
 				var red, green, blue, alpha uint8
