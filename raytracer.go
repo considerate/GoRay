@@ -232,19 +232,6 @@ func renderpoint(camera *matrix.DenseMatrix, scene Scene, x, y float64) Vector3 
 	}
 }
 
-/*
-float[] gatherPhotons(float[] p, int type, int id){
-  float[] energy = {0.0,0.0,0.0};
-  float[] N = surfaceNormal(type, id, p, gOrigin);                   //Surface Normal at Current Point
-  for (int i = 0; i < numPhotons[type][id]; i++){                    //Photons Which Hit Current Object
-    if (gatedSqDist3(p,photons[type][id][i][0],sqRadius)){           //Is Photon Close to Point?
-      float weight = max(0.0, -dot3(N, photons[type][id][i][1] ));   //Single Photon Diffuse Lighting
-      weight *= (1.0 - sqrt(gSqDist)) / exposure;                    //Weight by Photon-Point Distance
-      energy = add3(energy, mul3c(photons[type][id][i][2], weight)); //Add Photon's Energy to Total
-   }}
-  return energy;
-}*/
-
 func gatherPhotons(point, normal Vector3, scene Scene) Vector3 {
 	energy := Vector3{}
 	return energy
