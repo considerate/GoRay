@@ -25,6 +25,29 @@ func (sphere Sphere) normal(point Vector3) Vector3 {
 	return point.sub(sphere.center).norm()
 }
 
+func (sphere Sphere) contains(point Vector3) bool {
+	r := sphere.radius
+	rSq := r * r
+	c := sphere.center
+	p := point
+	d := c[0] - p[0]
+	dSq := d * d
+	if dSq > rSq {
+		return false
+	}
+	d = c[1] - p[1]
+	dSq += d * d
+	if dSq > rSq {
+		return false
+	}
+	d = c[2] - p[2]
+	dSq += d * d
+	if dSq > rSq {
+		return false
+	}
+	return true
+}
+
 func (sphere Sphere) material() *Material {
 	return sphere._material
 }

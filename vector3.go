@@ -35,3 +35,7 @@ func (v Vector3) norm() Vector3 {
 func (v Vector3) reflect(normal Vector3) Vector3 {
 	return v.sub(normal.multScalar(2.0 * v.dot(normal)))
 }
+
+func (v Vector3) copy() Vector3 {
+	return Vector3{v[0], v[1], v[2]}
+}
