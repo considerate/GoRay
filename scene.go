@@ -1,48 +1,74 @@
 package main
 
+import "github.com/unit3/kdtree"
+
 type Scene struct {
-	objects []Object
-	lights  []Light
-	photons []Photon
+	objects   []Object
+	lights    []Light
+	photonMap *kdtree.Tree
 }
 
 func setupScene() Scene {
 	materials := []Material{
 		Material{
-			Vector3{1, 0, 0},
-			0.8,
-			0.3,
-			0.5,
+			Vector3{1, 0, 0}, //color
+			0.6,              //diffuse
+			0.4,              //specular
+			0.0,              //absorb
+			1.0,              //reflection
+			0.3,              //refraction
+			1.3,              //refraction index
+			true,
 		},
 		Material{
-			Vector3{0, 1, 0},
-			0.8,
-			0.3,
-			0.9,
+			Vector3{0, 1, 0}, //color
+			0.8,              //diffuse
+			0.2,              //specular
+			0.0,              //absorb
+			2.0,              //reflection
+			0.0,              //refraction
+			1.0,              //refraction index
+			false,
 		},
 		Material{
-			Vector3{0, 0, 1},
-			0.8,
-			0.3,
-			0,
+			Vector3{0, 0, 1}, //color
+			0.8,              //diffuse
+			0.0,              //specular
+			0.2,              //absorb
+			0.0,              //reflection
+			0.0,              //refraction
+			1.0,              //refraction index
+			false,
 		},
 		Material{
-			Vector3{0, 1, 0},
-			0.8,
-			0.3,
-			0,
+			Vector3{0, 1, 0}, //color
+			0.8,              //diffuse
+			0.0,              //specular
+			0.2,              //absorb
+			0.0,              //reflection
+			0.0,              //refraction
+			1.0,              //refraction index
+			false,
 		},
 		Material{
-			Vector3{1, 0, 0},
-			0.8,
-			0.3,
-			0,
+			Vector3{1, 0, 0}, //color
+			0.8,              //diffuse
+			0.0,              //specular
+			0.2,              //absorb
+			0.0,              //reflection
+			0.0,              //refraction
+			1.0,              //refraction index
+			false,
 		},
 		Material{
-			Vector3{1, 1, 1},
-			0.8,
-			0.3,
-			0,
+			Vector3{1, 1, 1}, //color
+			0.8,              //diffuse
+			0.0,              //specular
+			0.2,              //absorb
+			0.0,              //reflection
+			0.0,              //refraction
+			1.0,              //refraction index
+			false,
 		},
 	}
 	spheres := []Sphere{
@@ -59,10 +85,10 @@ func setupScene() Scene {
 	}
 	lights := []Light{
 		Light{
-			Vector3{0, 20, 5},
+			Vector3{0, 5, -5},
 		},
 		Light{
-			Vector3{0, 10, 12},
+			Vector3{0, 5, 12},
 		},
 	}
 	planes := []Plane{

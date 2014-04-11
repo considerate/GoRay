@@ -15,7 +15,7 @@ func (plane Plane) intersect(ray *Ray) (t1, t2 float64) {
 	o := ray.origin
 	n := plane.n
 	p := plane.position
-	t := (p.sub(o)).dot(n) / (dir.dot(n))
+	t := (p.copy().sub(o)).dot(n) / (dir.dot(n))
 	return t, t
 }
 

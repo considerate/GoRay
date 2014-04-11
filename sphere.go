@@ -22,7 +22,7 @@ func (sphere Sphere) intersect(ray *Ray) (t1, t2 float64) {
 }
 
 func (sphere Sphere) normal(point Vector3) Vector3 {
-	return point.sub(sphere.center).norm()
+	return point.copy().sub(sphere.center).norm()
 }
 
 func (sphere Sphere) contains(point Vector3) bool {
